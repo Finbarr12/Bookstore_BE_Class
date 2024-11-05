@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
+const environment = require("../env/environmentVar");
 
 const uri = "mongodb://127.0.0.1:27017/test";
-const live_uri =
-  "mongodb+srv://FinbarrDB:codelab06@cluster0.2xzneqt.mongodb.net/bookstoreDb?retryWrites=true&w=majority&appName=Cluster0";
+const live_uri = environment.MONGODB_URI;
 
 const dbConnect = async () => {
   try {
