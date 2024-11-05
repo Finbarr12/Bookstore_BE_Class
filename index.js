@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const dbConnect = require("./config/db");
 const router = require("./router/authorRoutes");
@@ -16,6 +17,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 dbConnect();
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/author", router);
 app.use("/api/v1/books", bookRoutes);
