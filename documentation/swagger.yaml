@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: Sunday's Bookstore Application
+  description: A simple book store for Authors and users
+  version: 1.0.0
+servers:
+  - url: http://localhost:4567/api/v1
+security:
+  - bearerAuth: []
+
+paths:
+  /author/sign_up_author:
+    post:
+      summary: Sign up as an author
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/author"
+
+      responses:
+        "201":
+          description: Author created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/author"
+
+  /author/get_one_user:
+    get:
+      summary: Retrieve  a user by id
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Author gotten
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/author"
+
+  /author/get_all_users:
+    get:
+      summary: Retrieve all users
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: All users gotten
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/author"
+
+components:
+  schemas:
+    author:
+      type: object
+      properties:
+        name:
+          type: string
+        userName:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        confirmPassword:
+          type: string
+        phoneNumber:
+          type: number
+        role:
+          type: string
+      required:
+        - name
+        - userName
+        - password
+        - email
+        - confirmPassword
+        - phoneNumber
+        - role
+
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
